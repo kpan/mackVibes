@@ -16,95 +16,59 @@
 
     <script type="text/javascript">
 
+    $(document).ready(function() {
 
+      $("#mainPage").swipeleft(function(){
+        $.mobile.changePage("#votePage", { transition: "slide"});
+        console.log("swipe");
+      });
+      $("#mainPage").swiperight(function(){
+        $.mobile.changePage("#playlistPage", { transition: "slide", reverse:true});
+        console.log("swipe");
+      });
+      $("#votePage").swiperight(function(){
+        $.mobile.changePage("#mainPage", { transition: "slide", reverse:true});
+        console.log("swipe");
+      });
+       $("#playlistPage").swipeleft(function(){
+        $.mobile.changePage("#mainPage", { transition: "slide"});
+        console.log("swipe");
+      });
+    	
+      var upVote=document.getElementById("upVote");
+      upVote.addEventListener('click',function (e) {
+        console.log("thank you for voting.");
+      });
+     	
 
-
-
-     	var upVote=document.getElementById("upVote");
-      console.log(upVote);
-     	var downVote=document.getElementById("downVote");
-     	upVote.addEventListener('click',function (e) {
-     		console.log("thank you for voting.");
-     	});
+      var downVote=document.getElementById("downVote");
+     
 
      	downVote.addEventListener('click',function (e) {
      		console.log("Sorry for disapointing.");
 
      	});
+      
+      });
     </script>
 
 
   </head>
    
   <body>
-    <!--
-    <div id="mainPage" data-role="page">
-   		<div id="current">
-   			<p> Currently Playing:</p>
-   			<div id="songDisplay">
-   				<h4  style="margin:0px;">Suit and Tie</h4>
-   				<h5 style="margin:0px;">Justin Timberlake</h5>
-          <h6>genre</h6>
 
-   			</div>
-   		</div>
 
-   		<div id="rate">
-   			<h4>Rate:</h4>
-   			<div >
-   				<input id="upVote" type="image" src="img/upvote.jpg" name="upVote" width="60px" height="60px"> 
-   			</div>
-   			<div>
-   				<input type="image" src="img/downvote.jpg" name="downVote" width="90px" height="60px"> 
-   			</div>
-   		</div>
-
-   		<div id="button">
-   			<a  ref="https://twitter.com/intent/tweet?screen_name=triplec572" class="twitter-mention-button" data-related="triplec572">Tweet to @triplec572</a>
-  			<script>
-  			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-  			</script>
-   		</div>
-   	</div>
-    
-    -->
-
-    <div id="VotePage"  data-role="page">
-      <fieldset data-role="controlgroup" >
-        <legend>Vote for the next song!</legend>
-        <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked">
-        <label for="radio-choice-1">
-          <div id="songOption">
-            <div id="Song Display">
-              <h4>Suit and Tie</h4>
-              <h5>Justin Timberlake</h5>
-              <h6>R&B</h6>
-            </div>
-            <div id="voteNum">
-              <p>45</p>
-            </div>
-          </div>
-        </label>
-        <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
-        <label for="radio-choice-2">
-          <h4>Suit and Tie</h4>
-        </label>
-        <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
-        <label for="radio-choice-3">
-          <h5>Justin Timberlake</h5>
-
-        </label>
-      </fieldset>
-
-      <div id="VoteButtonBox">
-        <button data-role="button">Vote</button> 
-
+    <div id="playlistPage" data-role="page">
+      <div data-role="header" data-position="fixed" data-id="persister">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#playlistPage" class="ui-btn-active ui-state-persist" data-transition="slige">Playlist</a></li>
+            <li><a href="#mainPage" data-transition="slide">currently Playing</a></li>
+            <li><a href="#votePage" data-transition="slide" >Vote</a></li>
+          </ul>
+        </div>
       </div>
-
-    </div>
-    
-    <!--
-    <div id="Playlist" data-role="page">
+      <legend> Songs played so far tonight!</legend>
       <div id="listOfSongs">
 
 
@@ -147,6 +111,93 @@
 
       </div>
     </div>
--->
+
+    <div id="mainPage" data-role="page">
+   	  <div data-role="header" data-position="fixed" data-id="persister">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#playlistPage" data-transition="slide" data-direction="reverse">Playlist</a></li>
+            <li><a href="#mainPage" data-transition="slide" class="ui-btn-active ui-state-persist"  >currently Playing</a></li>
+            <li><a href="#votePage" data-transition="slide">Vote</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="current">
+   			<p> Currently Playing:</p>
+   			<div id="songDisplay">
+   				<h4  style="margin:0px;">Suit and Tie</h4>
+   				<h5 style="margin:0px;">Justin Timberlake</h5>
+          <h6>genre</h6>
+
+   			</div>
+   		</div>
+
+   		<div id="rate">
+   			<h4>Rate:</h4>
+   			<div >
+   				<input id="upVote" type="image" src="img/upvote.jpg" name="upVote" width="60px" height="60px"> 
+   			</div>
+   			<div>
+   				<input id="downVote" type="image" src="img/downvote.jpg" name="downVote" width="90px" height="60px"> 
+   			</div>
+   		</div>
+
+   		<div id="button">
+   			<a  ref="https://twitter.com/intent/tweet?screen_name=triplec572" class="twitter-mention-button" data-related="triplec572">Tweet to @triplec572</a>
+  			<script>
+  			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+  			</script>
+   		</div>
+   	</div>
+    
+
+    <div id="votePage"  data-role="page">
+      <div data-role="header" data-position="fixed" data-id="persister">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#playlistPage" data-transition="slide" data-direction="reverse">Playlist</a></li>
+            <li><a href="#mainPage" data-transition="slide"  data-direction="reverse">currently Playing</a></li>
+            <li><a href="#votePage" class="ui-btn-active ui-state-persist">Vote</a></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <fieldset data-role="controlgroup" >
+        <legend>Vote for the next song!</legend>
+        <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" data-icon="false">
+        <label for="radio-choice-1">
+          <div id="songOption">
+            <div id="Song Display">
+              <h4>Suit and Tie</h4>
+              <h5>Justin Timberlake</h5>
+              <h6>R&B</h6>
+            </div>
+            <div id="voteNum">
+              <p>45</p>
+            </div>
+          </div>
+        </label>
+        <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
+        <label for="radio-choice-2">
+          <h4>Suit and Tie</h4>
+        </label>
+        <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
+        <label for="radio-choice-3">
+          <h5>Justin Timberlake</h5>
+
+        </label>
+      </fieldset>
+
+      <div id="VoteButtonBox">
+        <button data-role="button">Vote</button> 
+
+      </div>
+
+    </div>
+    
+    
+
   </body>
 </html>
