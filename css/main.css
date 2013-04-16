@@ -1,0 +1,23 @@
+#songChoice  div{
+display: inline-block;
+	}
+#rate  div{
+display: inline-block;
+	padding-bottom: 10px;
+	}
+
+ul { 
+	list-style-type: none; 
+}
+body{
+	font-family: Raleway;
+}
+#songDisplay > h4{
+	margin:0px;
+}
+#songDisplay  > h5{
+	margin:0px;
+}
+#songDisplay  > h6{
+	margin:0px;
+}
