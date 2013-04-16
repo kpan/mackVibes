@@ -37,7 +37,7 @@
   </head>
    
   <body>
-    
+    <!--
     <div id="mainPage" data-role="page">
    		<div id="current">
    			<p> Currently Playing:</p>
@@ -67,74 +67,42 @@
    		</div>
    	</div>
     
-    <!--
+    -->
 
     <div id="VotePage"  data-role="page">
-      <div id="options">
-        <div id="songChoice">
-          
-          <div>
-            <h1>1.</h1>
+      <fieldset data-role="controlgroup" >
+        <legend>Vote for the next song!</legend>
+        <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked">
+        <label for="radio-choice-1">
+          <div id="songOption">
+            <div id="Song Display">
+              <h4>Suit and Tie</h4>
+              <h5>Justin Timberlake</h5>
+              <h6>R&B</h6>
+            </div>
+            <div id="voteNum">
+              <p>45</p>
+            </div>
           </div>
-          
-          <div id="Song Display">
-            <h4>Suit and Tie</h4>
-            <h5>Justin Timberlake</h5>
-            <h6>genre</h6>
-          </div>
+        </label>
+        <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
+        <label for="radio-choice-2">
+          <h4>Suit and Tie</h4>
+        </label>
+        <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
+        <label for="radio-choice-3">
+          <h5>Justin Timberlake</h5>
 
-          <div>
-            <input id="songChoiceBox" type="checkbox"  name="1stSong" width="60px" height="60px"> 
-          </div>
-        
-        </div>
-        <div id="songChoice">
-          
-          <div>
-            <h1>2.</h1>
-          </div>
-          
-          <div id="Song Display">
-            <h4>Suit and Tie</h4>
-            <h5>Justin Timberlake</h5>
-            <h6>genre</h6>
-          </div>
-          
-          <div>
-            <input id="songChoiceBox" type="checkbox"  name="2ndSong" width="60px" height="60px"> 
-          </div>
-        
-        </div>
-        
-        <div id="songChoice">
-          <div>
-            <h1>3.</h1>
-          </div>
-          
-          <div id="Song Display">
-            <h4>Suit and Tie</h4>
-            <h5>Justin Timberlake</h5>
-            <h6>genre</h6>
+        </label>
+      </fieldset>
 
-          </div>
-          
-          <div>
-            <input id="songChoiceBox" type="checkbox"  name="3rdSong" width="60px" height="60px"> 
-          </div>
-        
-        </div>
+      <div id="VoteButtonBox">
+        <button data-role="button">Vote</button> 
 
-      </div>
-
-      <div id="button">
-        <a href="https://twitter.com/intent/tweet?screen_name=triplec572" class="twitter-mention-button" data-related="triplec572">Tweet to @triplec572</a>
-        <script>
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-        </script>
       </div>
 
     </div>
-    -->
+    
     <!--
     <div id="Playlist" data-role="page">
       <div id="listOfSongs">

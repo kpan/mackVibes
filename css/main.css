@@ -21,3 +21,12 @@ body{
 #songDisplay  > h6{
 	margin:0px;
 }
+#songDisplay{
+	float: left;
+}
+#songOption > div{
+	display: inline-block;
+}
+#voteNum{
+	text-align: center;
+}
