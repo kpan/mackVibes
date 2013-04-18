@@ -3,20 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>mackVibes</title>
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
 
-
-    <script src="jquery.mobile.custom.min.js"></script>  
     <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
 
     <script type="text/javascript">
 
-    $(document).ready(function() {
+      $(document).ready(function() {
 
       $("#mainPage").swipeleft(function(){
         $.mobile.changePage("#votePage", { transition: "slide"});
@@ -36,42 +33,89 @@
       });
     	
       var upVote=document.getElementById("upVote");
+      var downVote=document.getElementById("downVote");
+
+      var alreadyVoted = false;
       upVote.addEventListener('click',function (e) {
         console.log("thank you for voting.");
+        if(!alreadyVoted){
+          alreadyVoted = true;
+          upVote.setAttribute('data-theme','b');
+          downVote.setAttribute('data-theme','a'); 
+        }
       });
-     	
-
-      var downVote=document.getElementById("downVote");
-     
-
      	downVote.addEventListener('click',function (e) {
      		console.log("Sorry for disapointing.");
-
+        if(!alreadyVoted){
+          upVote.setAttribute('data-theme','a');
+          downVote.setAttribute('data-theme','b'); 
+          alreadyVoted = true;
+        }
      	});
-      
+
+      $( "#voteButton").click(function( event, ui ) {
+          console.log("Clicked to vote...");
+          document.getElementById('voteContainer').style.display = 'none';
+          document.getElementById('blankScreen').style.display = 'block';
+          document.getElementById('votingResults').style.display = 'none';
+
+          $.mobile.loading( 'show', {
+              text: 'Voting...',
+              textVisible: true,
+              theme: 'a',
+              textonly: false,
+              html: ''
+          });
+          //Wait a bit...
+          window.setTimeout(continueFunction1,1000);
+      });
+
+      function continueFunction1() {
+        $.mobile.loading('hide');
+        console.log('called');
+
+        document.getElementById('voteContainer').style.display = 'none';
+        document.getElementById('blankScreen').style.display = 'block';
+        document.getElementById('votingResults').style.display = 'block';
+
+        //Wait a bit...
+        window.setTimeout(continueFunction1,1000);
+      }
+
+      function continueFunction2() {
+        $.mobile.loading('hide');
+        console.log('called');
+
+        document.getElementById('voteContainer').style.display = 'none';
+        document.getElementById('blankScreen').style.display = 'none';
+        document.getElementById('votingResults').style.display = 'block';
+      }
+
       });
     </script>
-
-
   </head>
    
   <body>
-
-
+    <!-- Start - Playlist Screen -->
     <div id="playlistPage" data-role="page">
-      <div data-role="header" data-position="fixed" data-id="persister">
+      <!-- Title bar at header -->
+      <div data-role="header" <div data-role="header" data-position="fixed">
+        <p class='header center'>Mack Vibes</p>
+      </div>
+
+      <!-- Navigation at footer -->
+      <div data-role="footer" data-position="fixed" data-id="persister">
         <div data-role="navbar">
           <ul>
             <li><a href="#playlistPage" class="ui-btn-active ui-state-persist" data-transition="slige">Playlist</a></li>
-            <li><a href="#mainPage" data-transition="slide">currently Playing</a></li>
+            <li><a href="#mainPage" data-transition="slide">Home</a></li>
             <li><a href="#votePage" data-transition="slide" >Vote</a></li>
           </ul>
         </div>
       </div>
-      <legend> Songs played so far tonight!</legend>
+
+      <legend class='center'> Songs played so far tonight!</legend>
       <div id="listOfSongs">
-
-
         <ul data-role="collapsible-set" data-collapsed-icon="arrow-d"> 
           <li  data-role="collapsible" > 
             <h4>Mercy by Kanye West, Big Sean</h4>
@@ -107,97 +151,150 @@
           </li>
         </ul>
       </div>
-      <div id="spotifyButton">
-
-      </div>
     </div>
+    <!-- End - Playlist Screen -->
 
+    <!-- Start - Home Screen -->
     <div id="mainPage" data-role="page">
-   	  <div data-role="header" data-position="fixed" data-id="persister">
+      <!-- Title bar at header -->
+      <div data-role="header" <div data-role="header" data-position="fixed">
+        <p class='header center'>Mack Vibes</p>
+      </div>
+
+      <!-- Navigation at footer -->
+   	  <div data-role="footer" data-position="fixed" data-id="persister">
         <div data-role="navbar">
           <ul>
             <li><a href="#playlistPage" data-transition="slide" data-direction="reverse">Playlist</a></li>
-            <li><a href="#mainPage" data-transition="slide" class="ui-btn-active ui-state-persist"  >currently Playing</a></li>
+            <li><a href="#mainPage" data-transition="slide" class="ui-btn-active ui-state-persist">Home</a></li>
             <li><a href="#votePage" data-transition="slide">Vote</a></li>
           </ul>
         </div>
       </div>
 
-      <div id="current">
-   			<p> Currently Playing:</p>
-   			<div id="songDisplay">
-   				<h4  style="margin:0px;">Suit and Tie</h4>
-   				<h5 style="margin:0px;">Justin Timberlake</h5>
-          <h6>genre</h6>
+      <legend class='center'> Currently Playing:</legend>
+      <!-- Body of Home Screen -->
+      <div id='homebody'>
+        <div id="current">
+          <div id="songDisplay" class='center'>
+            <p class='currentSong'>Suit and Tie</p>
+            <p class='currentArtist'>Artist: Justin Timberlake</p>
+            <p class='currentGenre'>Genre: Pop</p>
+          </div>
+        </div>
 
-   			</div>
-   		</div>
+     		<div id="rate" class='center'>
+     			<p>Rate This Party:</p>
 
-   		<div id="rate">
-   			<h4>Rate:</h4>
-   			<div >
-   				<input id="upVote" type="image" src="img/upvote.jpg" name="upVote" width="60px" height="60px"> 
-   			</div>
-   			<div>
-   				<input id="downVote" type="image" src="img/downvote.jpg" name="downVote" width="90px" height="60px"> 
-   			</div>
-   		</div>
+          <div data-role="controlgroup" data-type='horizontal'>
+            <a id="upVote"
+               data-icon="arrow-u"
+               data-theme='a'
+               data-iconpos="notext"
+               data-role="button">
+            </a>
+            <a id="downVote"
+               data-icon="arrow-d"
+               data-theme='a'
+               data-iconpos="notext"
+               data-role="button">
+            </a>
+          </div>
 
-   		<div id="button">
-   			<a  ref="https://twitter.com/intent/tweet?screen_name=triplec572" class="twitter-mention-button" data-related="triplec572">Tweet to @triplec572</a>
-  			<script>
-  			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-  			</script>
-   		</div>
+
+
+
+     		</div>
+
+     		<div id="button" class='center bottom'>
+     			<a  ref="https://twitter.com/intent/tweet?screen_name=triplec572" class="twitter-mention-button" data-related="triplec572">Tweet to @triplec572</a>
+    			<script>
+    			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+    			</script>
+     		</div>
+      </div>
    	</div>
+    <!-- End - Home Screen -->
     
-
+    <!-- Start - Voting Screen -->
     <div id="votePage"  data-role="page">
-      <div data-role="header" data-position="fixed" data-id="persister">
+
+      <!-- Title bar at header -->
+      <div data-role="header" <div data-role="header" data-position="fixed">
+        <p class='header center'>Mack Vibes</p>
+      </div>
+
+      <!-- Navigation at footer -->
+      <div data-role="footer" data-position="fixed" data-id="persister">
         <div data-role="navbar">
           <ul>
             <li><a href="#playlistPage" data-transition="slide" data-direction="reverse">Playlist</a></li>
-            <li><a href="#mainPage" data-transition="slide"  data-direction="reverse">currently Playing</a></li>
+            <li><a href="#mainPage" data-transition="slide"  data-direction="reverse">Home</a></li>
             <li><a href="#votePage" class="ui-btn-active ui-state-persist">Vote</a></li>
           </ul>
         </div>
       </div>
 
+      <!-- Body of vote screen -->
+      <div id="voteContainer" style="display:block">
+        <fieldset data-role="controlgroup" class='center'>
+          <legend>Vote for the next song!</legend>
 
-      <fieldset data-role="controlgroup" >
-        <legend>Vote for the next song!</legend>
-        <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" data-icon="false">
-        <label for="radio-choice-1">
-          <div id="songOption">
-            <div id="Song Display">
-              <h4>Suit and Tie</h4>
-              <h5>Justin Timberlake</h5>
-              <h6>R&B</h6>
+          <!-- First voting option -->
+          <input id="radio-choice-1" type="radio" name="radio-choice-1"  value="choice-1">
+          <label for="radio-choice-1">
+            <div id="songDisplay1" class='votingoption'>
+              <div>
+                <p id="voteSong1"   class='voteSong'>Love Me</p>
+                <p id="voteArtist1" class='voteArtist'>Lil Wayne</p>
+                <p id="voteGenre1"  class='voteGenre'>Hip Hop</p>
+                <p id="voteCount1"  class='voteCount'>Current vote: 24</p>
+              </div>
             </div>
-            <div id="voteNum">
-              <p>45</p>
+          </label>
+          
+          <!-- Second voting option -->
+          <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
+          <label for="radio-choice-2">
+            <div id="songDisplay2" class='votingoption'>
+              <div>
+                <p id="voteSong2"   class='voteSong'>Thrift Shop</p>
+                <p id="voteArtist2" class='voteArtist'>Macklemore</p>
+                <p id="voteGenre2"  class='voteGenre'>Hip Hop</p>
+                <p id="voteCount2"  class='voteCount'>Current vote: 39</p>
+              </div>
             </div>
-          </div>
-        </label>
-        <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
-        <label for="radio-choice-2">
-          <h4>Suit and Tie</h4>
-        </label>
-        <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
-        <label for="radio-choice-3">
-          <h5>Justin Timberlake</h5>
+          </label>
 
-        </label>
-      </fieldset>
-
-      <div id="VoteButtonBox">
-        <button data-role="button">Vote</button> 
-
+          <!-- Third voting option -->
+          <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
+          <label for="radio-choice-3">
+            <div id="songDisplay3" class='votingoption'>
+              <div>
+                <p id="voteSong3"   class='voteSong'>When I Was Your Man</p>
+                <p id="voteArtist3" class='voteArtist'>Bruno Mars</p>
+                <p id="voteGenre3"  class='voteGenre'>Pop</p>
+                <p id="voteCount3"  class='voteCount'>Current vote: 2</p>
+              </div>
+            </div>
+          </label>
+        </fieldset>
+        <div id="voteButton" class='center'>
+          <button data-role="button">Vote</button> 
+        </div>
       </div>
 
-    </div>
-    
-    
+      <!-- Voting Screen - After clicking Vote-->
+      <div id="blankScreen" style="display:none"></div> 
 
+      <!-- Voting Screen - Vote Results -->
+      <div id="votingResults" style="display:none">
+        <legend class='center'> Thanks for Voting! <br>Voting is Closed</legend>
+      </div>
+      
+    </div>
+    <!-- End - Voting Screen -->
+
+    
   </body>
 </html>

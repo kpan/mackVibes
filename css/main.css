@@ -1,6 +1,7 @@
 #songChoice  div{
 display: inline-block;
-	}
+
+}
 #rate  div{
 display: inline-block;
 	padding-bottom: 10px;
@@ -12,7 +13,100 @@ ul {
 body{
 	font-family: Raleway;
 }
-#songDisplay > h4{
+
+
+.center{
+	text-align: center;
+}
+.bottom{
+   vertical-align: text-bottom;
+}
+.header{
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+
+/*css for song currenly 'Currently Playing' label*/
+.currentLabel{
+	font-family: Raleway;
+	font-weight: bold;
+	font-size: 14px;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+/*css for song currenly playing*/
+.currentSong{
+	font-family: Raleway;
+	font-size: 20px;
+	margin: 0em;
+}
+
+/*css for artist of song currently playing*/
+.currentArtist{
+	font-family: Raleway;
+	font-size: 14px;
+	margin: 0em;
+}
+
+/*css for genre of song currently playing*/
+.currentGenre{
+	font-family: Raleway;
+	font-size: 14px;
+	margin: 0em;
+	margin-bottom: 8em;
+}
+
+/*css for rating div*/
+#rate div{
+	margin-bottom: 10px;
+}
+
+/*css for voting selections*/
+	/*css for song currently being voted on*/
+	.voteSong{
+		font-family: Raleway;
+		font-size: 20px;
+		margin: 0em;
+		margin-left: 5px;
+	}
+
+	/*css for artist of song being voted on*/
+	.voteArtist{
+		font-family: Raleway;
+		font-size: 14px;
+		margin: 0em;
+		margin-left: 5px;
+	}
+
+	/*css for genre of song being voted on*/
+	.voteGenre{
+		font-family: Raleway;
+		font-size: 14px;
+		margin: 0em;
+		margin-left: 5px;
+	}
+
+	/*css for genre of song being voted on*/
+	.voteCount{
+		font-family: Raleway;
+		font-size: 12px;
+		margin: 0em;
+		margin-left: 5px;
+	}
+
+	/*css for option that won*/
+	.voteWin{
+		/*background-color: green;*/
+		border:2px solid;
+		border-radius:25px;
+		margin-top: 30px;
+		margin-top: 30px;
+	}
+
+
+/*#songDisplay > h4{
 	margin:0px;
 }
 #songDisplay  > h5{
@@ -29,4 +123,4 @@ body{
 }
 #voteNum{
 	text-align: center;
-}
+}*/
