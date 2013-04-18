@@ -1,3 +1,8 @@
+@font-face {
+		font-family: 'RalewayBold';
+		src: url('fonts/Raleway-Bold.tff');
+
+}
 #songChoice  div{
 display: inline-block;
 
@@ -38,7 +43,7 @@ body{
 
 /*css for song currenly playing*/
 .currentSong{
-	font-family: Raleway;
+	font-family: asdfasdf;
 	font-size: 20px;
 	margin: 0em;
 }

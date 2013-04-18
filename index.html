@@ -5,8 +5,9 @@
     <title>mackVibes</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+
 
     <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
@@ -72,22 +73,9 @@
 
       function continueFunction1() {
         $.mobile.loading('hide');
-        console.log('called');
 
         document.getElementById('voteContainer').style.display = 'none';
         document.getElementById('blankScreen').style.display = 'block';
-        document.getElementById('votingResults').style.display = 'block';
-
-        //Wait a bit...
-        window.setTimeout(continueFunction1,1000);
-      }
-
-      function continueFunction2() {
-        $.mobile.loading('hide');
-        console.log('called');
-
-        document.getElementById('voteContainer').style.display = 'none';
-        document.getElementById('blankScreen').style.display = 'none';
         document.getElementById('votingResults').style.display = 'block';
       }
 
@@ -116,40 +104,36 @@
 
       <legend class='center'> Songs played so far tonight!</legend>
       <div id="listOfSongs">
-        <ul data-role="collapsible-set" data-collapsed-icon="arrow-d"> 
-          <li  data-role="collapsible" > 
-            <h4>Mercy by Kanye West, Big Sean</h4>
-            <p>Stuff about song 1</p>
-          </li>            
-          <li  data-role="collapsible"> 
-            <h4>Birthday Song by 2 Chainz, Kanye west</h4>
-            <p>Stuff about song 1</p>
+        <ul data-role="collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d"> 
+         <li  data-role="collapsible" > 
+           <h4>Mercy</h4>
+           <p>Artist: Kanye West. Album: Cruel Summer. Genre: Hip Hop. Released: April 3, 2012. Length: 5:32.</p>
+         </li>            
+         <li  data-role="collapsible"> 
+           <h4>Birthday Song</h4>
+           <p>Artist: 2 Chainz. Album: Based on a T.R.U. Story. Genre: Hip Hop. Released: June 24, 2012. Length: 5:06.</p>
+         </li>
+         <li  data-role="collapsible"> 
+           <h4>No Lie</h4>
+           <p>Artist: 2 Chainz featuring Drake. Album: Based on a T.R.U. Story. Genre: Hip Hop. Released: May 08, 2012. Length: 3:59.</p>
+         </li>
+         <li  data-role="collapsible"> 
+           <h4>Pop That</h4>
+           <p>Artist: French Montana featuring Drake. Album: Express My French. Genre: Hip Hop. Released: June 15, 2012. Length: 5:04.</p>
+         </li>
+         <li  data-role="collapsible"> 
+           <h4>Stay Schemin'</h4>
+           <p>Artist: Rick Ross featuring Drake and French Montana. Album: Rich Forever. Genre: Hip Hop. Released: April 17, 2012. Length: 4:28.</p>
+         </li>
+         <li  data-role="collapsible"> 
+           <h4>Cold</h4>
+           <p>Artist: Kanye West. Album: Cruel Summer. Genre: Hip Hop. Released: April 17, 2012. Length: 3:39.</p>
+         </li>
+         <li  data-role="collapsible"> 
+           <h4>Grove St Party</h4>
+           <p>Artist: Waka Flocka Flame. Album: Flockaveli. Genre: Hip Hop. Released: February 15, 2011. Length: 4:10.</p>
           </li>
-          <li  data-role="collapsible"> 
-            <h4>No Lie by 2 chainz, Drake</h4>
-            <p>Stuff about song 1</p>
-          </li>
-          <li  data-role="collapsible"> 
-            <h4>Pop That by French Montana</h4>
-            <p>Stuff about song 1</p>
-          </li>
-          <li  data-role="collapsible"> 
-            <h4>Stay Schemin by Rick Ross, Drake</h4>
-            <p>Stuff about song 1</p>
-          </li>
-          <li  data-role="collapsible"> 
-            <h4>Cold by Kanye West</h4>
-            <p>Stuff about song 1</p>
-          </li>
-          <li  data-role="collapsible"> 
-            <h4>New God Flow by Kanye West, Pusha T</h4>
-            <p>Stuff about song 3</p>
-           </li>
-          <li  data-role="collapsible"> 
-            <h4>m.A.A.d city by Kendric</h4>
-            <p>Stuff about song 4</p>
-          </li>
-        </ul>
+       </ul>
       </div>
     </div>
     <!-- End - Playlist Screen -->
@@ -241,7 +225,7 @@
           <legend>Vote for the next song!</legend>
 
           <!-- First voting option -->
-          <input id="radio-choice-1" type="radio" name="radio-choice-1"  value="choice-1">
+          <input id="radio-choice-1" type="radio" name="radio-choice-1" checked="true" value="choice-1">
           <label for="radio-choice-1">
             <div id="songDisplay1" class='votingoption'>
               <div>
