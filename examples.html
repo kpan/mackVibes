@@ -17,13 +17,10 @@
 						
 
 						
-						// get the second Radiohead biography by artist id and output it onto the page, also output the site it came from and the license used. Nested items are available through a prefix. E.g. "license_type"
-
-
-
+						// get the second Radiohead biography by artist id and output it onto the page, also output the site it came from and the license used. Nested items are available through a prefix. E.g.
 						// get a set of "Radiohead" artist images and output as a bunch of images to the page (limited to first five results)
-						echonest.artist("Drake").images( function(imageCollection) {
-							$('#artistImages').append( imageCollection.to_html('<img src="${url}">') );
+						echonest.artist("Drake").images(function(imageCollection) {
+							$('#artistImages').append(imageCollection.to_html('<img src="${url}">') );
 						}, {results: 1});
 	
 						
@@ -31,10 +28,17 @@
 					
 						// what terms are used to descript the artist David Bowie?
 						echonest.artist("Drake").terms( function(termsCollection) {
-							$('#artistTerms').append( termsCollection.to_html('<strong>${name}</strong><br/>') );
-						}, {results: 1});
+							termys = termsCollection.data.terms[0].name+", "+termsCollection.data.terms[1].name+", "+termsCollection.data.terms[2].name; 
+							
+
+							var termsDiv=$(document.createElement('div'));
+							$(termsDiv).html(termys);
+							
+
+							$('#artistTerms').append(termsDiv);
+
 						
-						
+						});
 					});
 					
 			</script>
@@ -46,6 +50,9 @@
 		<h1>EchoNest JavaScript API Examples</h1>
 		<p>A set of examples for interacting with the EchoNest API</p>
 		
+		<h3>Biographies of "Drake"</h3>
+		<div id="artistBiography"></div>
+
 		<h3>Images of "Drake"</h3>
 		<div id="artistImages"></div>
 		

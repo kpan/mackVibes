@@ -111,7 +111,9 @@
 		this.artist = function(name) {
 			return new Artist(name);
 		};
-		
+		this.song = function(name) {
+			return new Song(name);
+		};
 		/**
 		 * Used to handle a response back from the api. Will throw errors if a problem is detected.
 		 */
@@ -180,6 +182,18 @@
 			this.name = name;
 			this.endPoint = 'artist/'
 		};
+
+		var Song = function(name) {
+			this.name = name;
+			this.endPoint = 'song/'
+		};
+
+			Song.prototype.audio_summary = function(callback, options) {
+				var request = new Request(options, {name: this.name});
+				request.get(this.endPoint + 'audio_summary', function(response) {
+					callback( new audio_summaryCollection( response.getData() ) );
+				});
+			}
 
 			/**
 			 * Get all audio associated with this artist.
@@ -490,6 +504,19 @@
 		};
 		BiographyCollection.prototype = new Collection(); BiographyCollection.prototype.constructor = BiographyCollection;
 		
+		var audio_summaryCollection = function(data) {
+			var that = this;
+			this.data = data;
+			this.name = "audio_summary";
+			
+			// flatten the json so we have access to nested items from inside the template
+			$.each( this.data[this.name], function(count, item) {
+				that.data[that.name][count] = flatten_json(item);
+			});
+			
+		};
+		audio_summaryCollection.prototype = new Collection(); audio_summaryCollection.prototype.constructor = audio_summaryCollection;
+
 		/**
 		 * Familiarity information about an artist
 		 * Inherits from Singular
@@ -602,6 +629,7 @@
 		var TermsCollection = function(data) {
 			this.data = data;
 			this.name = "terms";
+			
 		};
 		TermsCollection.prototype = new Collection(); TermsCollection.prototype.constructor = TermsCollection;
 		
