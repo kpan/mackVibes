@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+
+<html>
+
+	<head>
+		<title>EchoNest JavaScript API</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		
+			<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.4.js" type="text/javascript"></script>
+			<script src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" type="text/javascript"></script>
+			<script src="js/jquery.echonest.js" type="text/javascript"></script>
+
+			<script type="text/javascript">
+					$(document).ready(function() {
+						
+						var echonest = new EchoNest("KTY7T5L87IZ1OG2TM");
+						
+
+						
+						// get the second Radiohead biography by artist id and output it onto the page, also output the site it came from and the license used. Nested items are available through a prefix. E.g. "license_type"
+
+
+
+						// get a set of "Radiohead" artist images and output as a bunch of images to the page (limited to first five results)
+						echonest.artist("Drake").images( function(imageCollection) {
+							$('#artistImages').append( imageCollection.to_html('<img src="${url}">') );
+						}, {results: 1});
+	
+						
+
+					
+						// what terms are used to descript the artist David Bowie?
+						echonest.artist("Drake").terms( function(termsCollection) {
+							$('#artistTerms').append( termsCollection.to_html('<strong>${name}</strong><br/>') );
+						}, {results: 1});
+						
+						
+					});
+					
+			</script>
+		
+	</head>
+
+	<body>
+		
+		<h1>EchoNest JavaScript API Examples</h1>
+		<p>A set of examples for interacting with the EchoNest API</p>
+		
+		<h3>Images of "Drake"</h3>
+		<div id="artistImages"></div>
+		
+		<h3>Terms Used to Describe "Drake"</h3>
+		<div id="artistTerms"></div>
+	</body>
+	
+</html>

@@ -4,82 +4,105 @@
     <meta charset="utf-8">
     <title>mackVibes</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
     <link rel="stylesheet" href="css/main.css">
 
 
     <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/jquery.echonest.js"></script>
 
     <script type="text/javascript">
 
       $(document).ready(function() {
 
-      $("#mainPage").swipeleft(function(){
-        $.mobile.changePage("#votePage", { transition: "slide"});
-        console.log("swipe");
-      });
-      $("#mainPage").swiperight(function(){
-        $.mobile.changePage("#playlistPage", { transition: "slide", reverse:true});
-        console.log("swipe");
-      });
-      $("#votePage").swiperight(function(){
-        $.mobile.changePage("#mainPage", { transition: "slide", reverse:true});
-        console.log("swipe");
-      });
-       $("#playlistPage").swipeleft(function(){
-        $.mobile.changePage("#mainPage", { transition: "slide"});
-        console.log("swipe");
-      });
-    	
-      var upVote=document.getElementById("upVote");
-      var downVote=document.getElementById("downVote");
+        $("#mainPage").swipeleft(function(){
+          $.mobile.changePage("#votePage", { transition: "slide"});
+          console.log("swipe");
+        });
+        $("#mainPage").swiperight(function(){
+          $.mobile.changePage("#playlistPage", { transition: "slide", reverse:true});
+          console.log("swipe");
+        });
+        $("#votePage").swiperight(function(){
+          $.mobile.changePage("#mainPage", { transition: "slide", reverse:true});
+          console.log("swipe");
+        });
+         $("#playlistPage").swipeleft(function(){
+          $.mobile.changePage("#mainPage", { transition: "slide"});
+          console.log("swipe");
+        });
+      	
+        var upVote=document.getElementById("upVote");
+        var downVote=document.getElementById("downVote");
 
-      var alreadyVoted = false;
-      upVote.addEventListener('click',function (e) {
-        console.log("thank you for voting.");
-        if(!alreadyVoted){
-          alreadyVoted = true;
-          upVote.setAttribute('data-theme','b');
-          downVote.setAttribute('data-theme','a'); 
-        }
-      });
-     	downVote.addEventListener('click',function (e) {
-     		console.log("Sorry for disapointing.");
-        if(!alreadyVoted){
-          upVote.setAttribute('data-theme','a');
-          downVote.setAttribute('data-theme','b'); 
-          alreadyVoted = true;
-        }
-     	});
+        var alreadyVoted = false;
+        upVote.addEventListener('click',function (e) {
+          console.log("thank you for voting.");
+          if(!alreadyVoted){
+            alreadyVoted = true;
+            upVote.setAttribute('data-theme','b');
+            downVote.setAttribute('data-theme','a'); 
+          }
+        });
+       	downVote.addEventListener('click',function (e) {
+       		console.log("Sorry for disapointing.");
+          if(!alreadyVoted){
+            upVote.setAttribute('data-theme','a');
+            downVote.setAttribute('data-theme','b'); 
+            alreadyVoted = true;
+          }
+       	});
 
-      $( "#voteButton").click(function( event, ui ) {
-          console.log("Clicked to vote...");
+        $('input[id=radio-choice-1]').click(function( event, ui ) {
+          console.log("clicked");
+          $( "#radio-choice-1").addClass("currentSelectionVote");
+        });
+        $("#voteButton").click(function( event, ui ) {
+            console.log("Clicked to vote...");
+            document.getElementById('voteContainer').style.display = 'none';
+            document.getElementById('blankScreen').style.display = 'block';
+            document.getElementById('votingResults').style.display = 'none';
+
+            $.mobile.loading( 'show', {
+                text: 'Voting...',
+                textVisible: true,
+                theme: 'a',
+                textonly: false,
+                html: ''
+            });
+            //Wait a bit...
+            window.setTimeout(continueFunction1,1000);
+        });
+
+        function continueFunction1() {
+          $.mobile.loading('hide');
+
           document.getElementById('voteContainer').style.display = 'none';
           document.getElementById('blankScreen').style.display = 'block';
-          document.getElementById('votingResults').style.display = 'none';
+          document.getElementById('votingResults').style.display = 'block';
+        }
 
-          $.mobile.loading( 'show', {
-              text: 'Voting...',
-              textVisible: true,
-              theme: 'a',
-              textonly: false,
-              html: ''
-          });
-          //Wait a bit...
-          window.setTimeout(continueFunction1,1000);
-      });
+    var echonest = new EchoNest("7GJNNNYLZRW2XWPAA");
 
-      function continueFunction1() {
-        $.mobile.loading('hide');
+    function fillSongInfo(){
 
-        document.getElementById('voteContainer').style.display = 'none';
-        document.getElementById('blankScreen').style.display = 'block';
-        document.getElementById('votingResults').style.display = 'block';
-      }
+      echonest.artist("Drake").images( function(imageCollection) {
+        $('#artistImages').append( imageCollection.to_html('<img src="${url}">') );
+      }, {results: 1});
 
-      });
+      // what terms are used to descript the artist David Bowie?
+      echonest.artist("David Bowie").terms( function(termsCollection) {
+        $('#artistTerms').append( termsCollection.to_html('<strong>${name}</strong> - ${frequency}<br/>') );
+      });        
+
+     }
+    
+    });
+
+
     </script>
   </head>
    
@@ -87,7 +110,8 @@
     <!-- Start - Playlist Screen -->
     <div id="playlistPage" data-role="page">
       <!-- Title bar at header -->
-      <div data-role="header" <div data-role="header" data-position="fixed">
+      <div data-role="header" data-role="header" data-position="fixed"
+      data-id="persister">
         <p class='header center'>Mack Vibes</p>
       </div>
 
@@ -141,7 +165,7 @@
     <!-- Start - Home Screen -->
     <div id="mainPage" data-role="page">
       <!-- Title bar at header -->
-      <div data-role="header" <div data-role="header" data-position="fixed">
+      <div data-role="header" data-role="header" data-position="fixed" data-id="persister">
         <p class='header center'>Mack Vibes</p>
       </div>
 
@@ -204,7 +228,7 @@
     <div id="votePage"  data-role="page">
 
       <!-- Title bar at header -->
-      <div data-role="header" <div data-role="header" data-position="fixed">
+      <div data-role="header" data-role="header" data-position="fixed" data-id="persister">
         <p class='header center'>Mack Vibes</p>
       </div>
 

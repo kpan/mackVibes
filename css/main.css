@@ -43,7 +43,7 @@ body{
 
 /*css for song currenly playing*/
 .currentSong{
-	font-family: asdfasdf;
+	font-family: Raleway;
 	font-size: 20px;
 	margin: 0em;
 }
@@ -108,7 +108,12 @@ body{
 		border-radius:25px;
 		margin-top: 30px;
 		margin-top: 30px;
+
 	}
+	.currentSelectionVote{
+		background-color: #005580;
+	}
+
 
 
 /*#songDisplay > h4{
