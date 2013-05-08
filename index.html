@@ -86,23 +86,59 @@
         }
 
     var echonest = new EchoNest("7GJNNNYLZRW2XWPAA");
+  
 
-    function fillSongInfo(){
-
-      echonest.artist("Drake").images( function(imageCollection) {
-        $('#artistImages').append( imageCollection.to_html('<img src="${url}">') );
-      }, {results: 1});
-
-      // what terms are used to descript the artist David Bowie?
-      echonest.artist("David Bowie").terms( function(termsCollection) {
-        $('#artistTerms').append( termsCollection.to_html('<strong>${name}</strong> - ${frequency}<br/>') );
-      });        
-
-     }
+    /*  var cPT= $(document.createElement('span'));
+      $(cPT).css("float", "right");
+      $(cPT).html("12:30");
+      $("#adding").html($("#adding").html(),"asfd");
     
-    });
+    */function fillSongInfo(Artist, Song, Time){            
+
+            var collapsiblePiece= $(document.createElement('li'));
+            $(collapsiblePiece).attr("data-role","collapsible");
+            
+            var cPH= $(document.createElement('h4'));
+            $(cPH).html(Song);
+            var cPT= $(document.createElement('span'));
+            $(cPT).css("float", "right");
+            $(cPT).html(Time);
+            $(cPH).append(cPT);
+
+            var cPD= $(document.createElement('div'));
+            $(cPD).attr("id","collapsible"+$("playlistUL").children().size());
+            $(cPD).attr("float", "left");
+
+            // get the second Radiohead biography by artist id and output it onto the page, also output the site it came from and the license used. Nested items are available through a prefix. E.g.
+            // get a set of "Radiohead" artist images and output as a bunch of images to the page (limited to first five results)
+
+            var termsDiv=$(document.createElement('div'));
+            // what terms are used to descript the artist David Bowie?
+           
+            echonest.artist(Artist).images(function(imageCollection) {
+              $(cPD).append(imageCollection.to_html('<img src="${url}" style="height:100px;width:100px;float:left">') );
+  
+            echonest.artist(Artist).terms( function(termsCollection) {
+              termys = termsCollection.data.terms[0].name+", "+termsCollection.data.terms[1].name+", "+termsCollection.data.terms[2].name; 
+              $(termsDiv).html(termys);
+              $(cPD).append("<div>Artist:"+Artist+"</br>Genre:"+termsDiv.html()+"</div>");
+              });
+                          
+            }, {results: 1});
+            
 
 
+  
+
+            $(collapsiblePiece).append(cPH);
+            $(collapsiblePiece).append(cPD);
+            $(collapsiblePiece).collapsible();
+            $("#playlistUL").prepend($(collapsiblePiece));
+
+                
+    };
+      fillSongInfo("Drake","Forever","12:30");
+  });
     </script>
   </head>
    
@@ -128,8 +164,8 @@
 
       <legend class='center'> Songs played so far tonight!</legend>
       <div id="listOfSongs">
-        <ul data-role="collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d"> 
-         <li  data-role="collapsible" > 
+        <ul data-role="collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" id="playlistUL"> 
+         <li  data-role="collapsible"  > 
            <h4>Mercy</h4>
            <p>Artist: Kanye West. Album: Cruel Summer. Genre: Hip Hop. Released: April 3, 2012. Length: 5:32.</p>
          </li>            
@@ -150,8 +186,8 @@
            <p>Artist: Rick Ross featuring Drake and French Montana. Album: Rich Forever. Genre: Hip Hop. Released: April 17, 2012. Length: 4:28.</p>
          </li>
          <li  data-role="collapsible"> 
-           <h4>Cold</h4>
-           <p>Artist: Kanye West. Album: Cruel Summer. Genre: Hip Hop. Released: April 17, 2012. Length: 3:39.</p>
+             <h4>Cold</h4>
+             <div id="Collapsible1">Artist: Kanye West. Album: Cruel Summer. Genre: Hip Hop. Released: April 17, 2012. Length: 3:39.</div>
          </li>
          <li  data-role="collapsible"> 
            <h4>Grove St Party</h4>

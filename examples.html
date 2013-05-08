@@ -19,10 +19,10 @@
 						
 						// get the second Radiohead biography by artist id and output it onto the page, also output the site it came from and the license used. Nested items are available through a prefix. E.g.
 						// get a set of "Radiohead" artist images and output as a bunch of images to the page (limited to first five results)
-						echonest.artist("Drake").images(function(imageCollection) {
-							$('#artistImages').append(imageCollection.to_html('<img src="${url}">') );
-						}, {results: 1});
-	
+            echonest.artist("Drake").images(function(imageCollection) {
+              $('#artistImages').append(imageCollection.to_html('<img src="${url}" style="height:100px;width:100px">') );
+            }, {results: 1});
+  
 						
 
 					
